@@ -1,10 +1,7 @@
-
 # Setting PATH for Python 3.4
 # The orginal version is saved in .bash_profile.pysave
 #PATH="/usr/local/bin${PATH}"
     export PS1="________________________________________________________________________________\w $: "
-alias m='/Users/Samuel/bin/make_script'
-
 
 alias rt='source .bash_profile'
 alias cp="cp -v"
@@ -16,14 +13,10 @@ alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias c='clear'                             # c:Clear terminal display
-alias gsoc='cd Documents/GSOC/'
-alias ds='cd ~/Documents/School/distributed/mp2/cs425-sp18/mp2'
 alias health=' cd ~/Documents/Ferris_Lessons/health'
 alias work=' cd ~/Documents/Ferris_Lessons/work'
 alias lessons='cd ~/Documents/Ferris_Lessons/'
-alias latin='cd ~/Documents/School/introtoLat/'
 alias tls='ls -tr'
-alias blender=/Applications/Blender/blender.app/Contents/MacOS/blender
 
 export CLICOLOR=1
 export LSCOLORS=Exfxcxdxbxegedabagacad
@@ -43,10 +36,6 @@ function as(){
 	ls -al
 }
 
-function cm(){
-	open https://www.gmail.com
-}
-
 function newtab() {
 	if [ "$PWD" != "$MYOLDPWD" ]; then
 		MYOLDPWD="$PWD";
@@ -64,14 +53,13 @@ function vimbash(){
 	vim ~/.vimrc
 }
 
-function send(){
+function push(){
 	git commit -am "$1"
-	git push
+	git push origin "$2"
 }
 
 function pull(){
-	git stash
-	git pull
+	git pull origin "$1"
 }
   
 # Tell grep to highlight matches
