@@ -61,6 +61,10 @@ function push(){
 function pull(){
 	git pull origin "$1"
 }
+
+function branch(){
+	git branch
+}
   
 # Tell grep to highlight matches
   export GREP_OPTIONS='--color=auto'
