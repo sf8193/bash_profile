@@ -3,7 +3,7 @@
 #PATH="/usr/local/bin${PATH}"
     export PS1="________________________________________________________________________________\w $: "
 
-alias rt='source .bash_profile'
+alias rt='source ~/.bash_profile'
 alias cp="cp -v"
 alias mv="mv -v"
 alias ..='cd ../'                           # Go back 1 directory level
@@ -21,16 +21,6 @@ alias tls='ls -tr'
 export CLICOLOR=1
 export LSCOLORS=Exfxcxdxbxegedabagacad
 
-function mp2l(){
-	ds
-	python3 MP2.py $1
-}
-
-function mp2e(){
-	ds
-	python3 MP2.py $1 eventual
-}
-
 function as(){
 	cd $1
 	ls -al
@@ -45,25 +35,49 @@ function newtab() {
 export PROMPT_COMMAND=newtab
 
 function ebash(){
-	cd
-	vim .bash_profile
+	vim ~/.bash_profile
 }
 
 function vimbash(){
 	vim ~/.vimrc
 }
 
+function commit(){
+    ticket="EE"
+    my_branch=`branch | grep \* | cut -d ' ' -f2`
+    BR=${my_branch#"${my_branch%%$ticket*}"} # takes "branch" and cuts everything before "ticket" see more here http://mywiki.wooledge.org/BashGuide/Parameters#Parameter_Expansion and here https://unix.stackexchange.com/questions/167755/remove-leading-string-in-bash
+    git commit -am "$BR $1"
+}
+
 function push(){
-	git commit -am "$1"
-	git push origin "$2"
+# steps to implement
+# 1) paste in your ~/.bash_profile
+# 3) run source .bash_profile on cli
+    commit "$1"
+    git push origin $my_branch
+}
+
+function forReview(){
+    git fetch origin $1
+    git checkout -b $1_review origin/$1
+}
+
+function newBranch(){
+    git checkout -b $1
+    git push -u origin $1
 }
 
 function pull(){
 	git pull origin "$1"
 }
 
+function log(){
+        git log --pretty=format:"%h - (%an, %ar) ----  %s"  --graph
+}
+
 function branch(){
-	git branch
+    git branch -vv
+    git status --short
 }
   
 # Tell grep to highlight matches
