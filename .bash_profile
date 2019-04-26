@@ -1,9 +1,10 @@
 # Setting PATH for Python 3.4
 # The orginal version is saved in .bash_profile.pysave
-#PATH="/usr/local/bin${PATH}"
-    export PS1="________________________________________________________________________________\w $: "
+PATH="/usr/local/bin${PATH}"
+export PS1="________________________________________________________________________________\w $: "
 
 alias rt='source ~/.bash_profile'
+alias refugee='cd ~/toolbox'
 alias cp="cp -v"
 alias mv="mv -v"
 alias ..='cd ../'                           # Go back 1 directory level
@@ -46,7 +47,7 @@ function commit(){
     ticket="EE"
     my_branch=`branch | grep \* | cut -d ' ' -f2`
     BR=${my_branch#"${my_branch%%$ticket*}"} # takes "branch" and cuts everything before "ticket" see more here http://mywiki.wooledge.org/BashGuide/Parameters#Parameter_Expansion and here https://unix.stackexchange.com/questions/167755/remove-leading-string-in-bash
-    git commit -am "$BR $1"
+    git commit -am "$BR: $1"
 }
 
 function push(){
@@ -62,6 +63,10 @@ function forReview(){
     git checkout -b $1_review origin/$1
 }
 
+function checkout(){
+	git checkout $1
+}
+
 function newBranch(){
     git checkout -b $1
     git push -u origin $1
@@ -72,7 +77,7 @@ function pull(){
 }
 
 function log(){
-        git log --pretty=format:"%h - (%an, %ar) ----  %s"  --graph
+	git log --pretty=format:"%h - (%an, %ar) ----  %s"  --graph
 }
 
 function branch(){
